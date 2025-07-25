@@ -1,0 +1,635 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Srima - Journey from Sarajevo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'roboto': ['Roboto', 'sans-serif'],
+                    },
+                    colors: {
+                        'material-blue': {
+                            50: '#e3f2fd',
+                            100: '#bbdefb',
+                            200: '#90caf9',
+                            300: '#64b5f6',
+                            400: '#42a5f5',
+                            500: '#2196f3',
+                            600: '#1e88e5',
+                            700: '#1976d2',
+                            800: '#1565c0',
+                            900: '#0d47a1',
+                        },
+                        'material-teal': {
+                            50: '#e0f2f1',
+                            100: '#b2dfdb',
+                            200: '#80cbc4',
+                            300: '#4db6ac',
+                            400: '#26a69a',
+                            500: '#009688',
+                            600: '#00897b',
+                            700: '#00796b',
+                            800: '#00695c',
+                            900: '#004d40',
+                        },
+                        'material-indigo': {
+                            50: '#e8eaf6',
+                            100: '#c5cae9',
+                            200: '#9fa8da',
+                            300: '#7986cb',
+                            400: '#5c6bc0',
+                            500: '#3f51b5',
+                            600: '#3949ab',
+                            700: '#303f9f',
+                            800: '#283593',
+                            900: '#1a237e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-icons {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+        }
+    </style>
+</head>
+<body class="font-roboto bg-gradient-to-br from-material-blue-50 to-material-teal-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white/95 backdrop-blur-sm shadow-lg sticky top-0 z-50 border-b border-material-blue-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold bg-gradient-to-r from-material-blue-600 to-material-teal-600 bg-clip-text text-transparent">
+                        Srima
+                    </h1>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="text-material-blue-800 hover:text-material-blue-600 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-material-blue-50">Home</a>
+                        <a href="#streetview" class="text-material-blue-800 hover:text-material-blue-600 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-material-blue-50">Street View</a>
+                        <a href="#about" class="text-material-blue-800 hover:text-material-blue-600 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-material-blue-50">About</a>
+                        <a href="#map" class="text-material-blue-800 hover:text-material-blue-600 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-material-blue-50">Map</a>
+                        <a href="#gallery" class="text-material-blue-800 hover:text-material-blue-600 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-material-blue-50">Gallery</a>
+                        <a href="#contact" class="text-material-blue-800 hover:text-material-blue-600 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-material-blue-50">Contact</a>
+                    </div>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-material-blue-800 hover:text-material-blue-600 p-2">
+                        <span class="material-icons">menu</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-material-blue-100">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" class="block px-3 py-2 text-material-blue-800 hover:text-material-blue-600 hover:bg-material-blue-50 rounded-md text-base font-medium">Home</a>
+                <a href="#streetview" class="block px-3 py-2 text-material-blue-800 hover:text-material-blue-600 hover:bg-material-blue-50 rounded-md text-base font-medium">Street View</a>
+                <a href="#about" class="block px-3 py-2 text-material-blue-800 hover:text-material-blue-600 hover:bg-material-blue-50 rounded-md text-base font-medium">About</a>
+                <a href="#map" class="block px-3 py-2 text-material-blue-800 hover:text-material-blue-600 hover:bg-material-blue-50 rounded-md text-base font-medium">Map</a>
+                <a href="#gallery" class="block px-3 py-2 text-material-blue-800 hover:text-material-blue-600 hover:bg-material-blue-50 rounded-md text-base font-medium">Gallery</a>
+                <a href="#contact" class="block px-3 py-2 text-material-blue-800 hover:text-material-blue-600 hover:bg-material-blue-50 rounded-md text-base font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="relative overflow-hidden">
+            <div class="bg-gradient-to-br from-material-blue-600 via-material-indigo-600 to-material-teal-600 min-h-screen flex items-center">
+                <div class="absolute inset-0 bg-black/10"></div>
+                <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+                    <div class="text-center">
+                        <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+                            Welcome to <span class="bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">Srima</span>
+                        </h1>
+                        <p class="text-xl md:text-2xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed">
+                            Discover the breathtaking beauty of Srima and embark on an unforgettable journey from Sarajevo to the Croatian coast
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                            <a href="#map" class="group bg-white text-material-blue-700 px-8 py-4 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center gap-3">
+                                <span class="material-icons group-hover:rotate-12 transition-transform duration-300">directions</span>
+                                Get Directions
+                            </a>
+                            <a href="https://maps.app.goo.gl/TnDuBhacF5GHS7Wc8" target="_blank" class="group bg-gradient-to-r from-material-teal-500 to-material-teal-600 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center gap-3">
+                                <span class="material-icons group-hover:scale-110 transition-transform duration-300">map</span>
+                                Open Google Maps
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Decorative elements -->
+                <div class="absolute top-20 left-10 w-32 h-32 bg-white/10 rounded-full blur-xl"></div>
+                <div class="absolute bottom-20 right-10 w-48 h-48 bg-yellow-300/20 rounded-full blur-xl"></div>
+                <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-material-teal-300/20 rounded-full blur-lg"></div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-material-blue-900 mb-4">Why Visit Srima?</h2>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">Experience the perfect blend of natural beauty, rich culture, and Mediterranean charm</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-gradient-to-br from-material-blue-50 to-material-blue-100 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="w-16 h-16 bg-material-blue-500 rounded-xl flex items-center justify-center mb-6">
+                            <span class="material-icons text-white text-3xl">landscape</span>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-material-blue-900 mb-4">Stunning Coastline</h3>
+                        <p class="text-gray-700 leading-relaxed">Crystal clear waters, pristine beaches, and breathtaking coastal views that will leave you mesmerized.</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-material-teal-50 to-material-teal-100 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="w-16 h-16 bg-material-teal-500 rounded-xl flex items-center justify-center mb-6">
+                            <span class="material-icons text-white text-3xl">restaurant</span>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-material-teal-900 mb-4">Delicious Cuisine</h3>
+                        <p class="text-gray-700 leading-relaxed">Savor authentic Mediterranean flavors with fresh seafood and local specialties.</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-material-indigo-50 to-material-indigo-100 p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="w-16 h-16 bg-material-indigo-500 rounded-xl flex items-center justify-center mb-6">
+                            <span class="material-icons text-white text-3xl">castle</span>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-material-indigo-900 mb-4">Rich History</h3>
+                        <p class="text-gray-700 leading-relaxed">Explore centuries of history through ancient architecture and cultural landmarks.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Street View Section -->
+        <section id="streetview" class="py-20 bg-gradient-to-br from-material-indigo-50 via-white to-material-blue-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-material-blue-900 mb-4">Explore Srima in 360°</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">Take a virtual walk through the beautiful streets of Srima and get a feel for this charming Croatian destination</p>
+                </div>
+
+                <div class="bg-white rounded-3xl shadow-2xl overflow-hidden">
+                    <div class="p-8">
+                        <div class="mb-8">
+                            <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-12 h-12 bg-material-blue-100 rounded-lg flex items-center justify-center">
+                                        <span class="material-icons text-material-blue-600">360</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-xl font-semibold text-material-blue-900">Google Street View</h3>
+                                        <p class="text-gray-600">Interactive 360° view of Srima</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-3">
+                                    <a href="https://www.google.com/maps/@43.747773,15.7969733,3a,90y,211.42h,112.59t/data=!3m7!1e1!3m5!1scZD3fi1Bti0LWohe4w6jjA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-22.59128022511274%26panoid%3DcZD3fi1Bti0LWohe4w6jjA%26yaw%3D211.4245555082145!7i13312!8i6656?entry=ttu&g_ep=EgoyMDI1MDcyMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="inline-flex items-center gap-2 bg-material-teal-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-material-teal-700 transition-colors duration-200">
+                                        <span class="material-icons text-sm">open_in_new</span>
+                                        Open in Google Maps
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="rounded-2xl overflow-hidden shadow-lg mb-8">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!4v1690000000000!6m8!1m7!1scZD3fi1Bti0LWohe4w6jjA!2m2!1d43.747773!2d15.7969733!3f211.42!4f-22.59!5f0.7820865974627469" 
+                                width="100%" 
+                                height="600" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+
+                        <!-- Exact Location Card -->
+                        <div class="mb-8 bg-gradient-to-r from-material-blue-600 to-material-teal-600 rounded-3xl p-8 text-white shadow-2xl">
+                            <div class="text-center mb-8">
+                                <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                                    <span class="material-icons text-4xl">apartment</span>
+                                </div>
+                                <h3 class="text-3xl font-bold mb-4">Your Exact Location</h3>
+                                <p class="text-white/90 text-lg leading-relaxed max-w-2xl mx-auto">
+                                    Second Floor • Second Flat • Left Side
+                                </p>
+                            </div>
+                            
+                            <div class="grid md:grid-cols-3 gap-6">
+                                <div class="bg-white/10 p-6 rounded-2xl backdrop-blur-sm">
+                                    <div class="flex items-center gap-3 mb-4">
+                                        <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                                            <span class="material-icons text-white">waves</span>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-lg font-semibold">Beach</h4>
+                                            <p class="text-white/80 text-sm">Crystal clear waters</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-2xl font-bold text-yellow-300">70m</div>
+                                    <p class="text-white/70 text-sm">1-minute walk</p>
+                                </div>
+
+                                <div class="bg-white/10 p-6 rounded-2xl backdrop-blur-sm">
+                                    <div class="flex items-center gap-3 mb-4">
+                                        <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                                            <span class="material-icons text-white">store</span>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-lg font-semibold">Tommy Market</h4>
+                                            <p class="text-white/80 text-sm">Daily groceries</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-2xl font-bold text-yellow-300">2 min</div>
+                                    <p class="text-white/70 text-sm">Easy walking distance</p>
+                                </div>
+
+                                <div class="bg-white/10 p-6 rounded-2xl backdrop-blur-sm">
+                                    <div class="flex items-center gap-3 mb-4">
+                                        <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                                            <span class="material-icons text-white">restaurant</span>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-lg font-semibold">Šaci</h4>
+                                            <p class="text-white/80 text-sm">Local dining</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-2xl font-bold text-yellow-300">3 min</div>
+                                    <p class="text-white/70 text-sm">Authentic cuisine</p>
+                                </div>
+                            </div>
+
+                            <div class="mt-8 text-center">
+                                <div class="inline-flex items-center gap-2 bg-white/20 px-6 py-3 rounded-full">
+                                    <span class="material-icons text-yellow-300">location_on</span>
+                                    <span class="font-medium">Second Floor • Second Flat • Left Side</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <div class="bg-gradient-to-br from-material-blue-50 to-material-blue-100 p-6 rounded-xl">
+                                <div class="flex items-center gap-3 mb-3">
+                                    <div class="w-10 h-10 bg-material-blue-500 rounded-lg flex items-center justify-center">
+                                        <span class="material-icons text-white">visibility</span>
+                                    </div>
+                                    <h4 class="text-lg font-semibold text-material-blue-900">Virtual Tour</h4>
+                                </div>
+                                <p class="text-gray-700 text-sm">Explore the streets, architecture, and atmosphere of Srima from anywhere in the world</p>
+                            </div>
+                            <div class="bg-gradient-to-br from-material-teal-50 to-material-teal-100 p-6 rounded-xl">
+                                <div class="flex items-center gap-3 mb-3">
+                                    <div class="w-10 h-10 bg-material-teal-500 rounded-lg flex items-center justify-center">
+                                        <span class="material-icons text-white">place</span>
+                                    </div>
+                                    <h4 class="text-lg font-semibold text-material-teal-900">Real Location</h4>
+                                </div>
+                                <p class="text-gray-700 text-sm">This is exactly what you'll see when you arrive - authentic street-level views</p>
+                            </div>
+                            <div class="bg-gradient-to-br from-material-indigo-50 to-material-indigo-100 p-6 rounded-xl">
+                                <div class="flex items-center gap-3 mb-3">
+                                    <div class="w-10 h-10 bg-material-indigo-500 rounded-lg flex items-center justify-center">
+                                        <span class="material-icons text-white">control_camera</span>
+                                    </div>
+                                    <h4 class="text-lg font-semibold text-material-indigo-900">Interactive</h4>
+                                </div>
+                                <p class="text-gray-700 text-sm">Click and drag to look around, zoom in and out to explore every detail</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 bg-gradient-to-r from-material-teal-50 to-material-blue-50 rounded-2xl p-6">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <span class="material-icons text-yellow-600">lightbulb</span>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-semibold text-material-blue-900 mb-1">Pro Tip</h4>
+                                    <p class="text-gray-700">Use the Street View to familiarize yourself with the area before your trip. You can even plan your walking routes and identify nearby landmarks!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 bg-gradient-to-br from-material-teal-50 via-white to-material-indigo-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-material-blue-900 mb-4">About Our Location</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">Discover the perfect location just 70 meters from the beach with easy access to local markets and authentic Croatian cuisine</p>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <!-- Location Features -->
+                    <div class="space-y-6">
+                        <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border-l-4 border-material-blue-500">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-material-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <span class="material-icons text-material-blue-600">waves</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-material-blue-900 mb-2">70m from Beach</h3>
+                                    <p class="text-gray-700">Just a 1-minute walk to pristine Croatian coastline and crystal-clear waters</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border-l-4 border-material-teal-500">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-material-teal-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <span class="material-icons text-material-teal-600">store</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-material-teal-900 mb-2">Tommy Market - 2 min walk</h3>
+                                    <p class="text-gray-700">Convenient local market for fresh groceries, daily necessities, and local products</p>
+                                    <a href="https://maps.app.goo.gl/6ESwVuyJznJAzVfM6" target="_blank" class="inline-flex items-center gap-1 text-material-teal-600 hover:text-material-teal-800 font-medium text-sm mt-2">
+                                        <span class="material-icons text-sm">place</span>
+                                        View on Map
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border-l-4 border-purple-500">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <span class="material-icons text-purple-600">restaurant</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-purple-900 mb-2">Šaci - 3 min walk</h3>
+                                    <p class="text-gray-700">Local dining spot for authentic Croatian cuisine and traditional specialties</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border-l-4 border-material-indigo-500">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-material-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <span class="material-icons text-material-indigo-600">restaurant_menu</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-material-indigo-900 mb-2">Authentic Čevapi</h3>
+                                    <p class="text-gray-700">Experience the best traditional Balkan grilled meat dish - fresh, flavorful, and authentic</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border-l-4 border-green-500">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <span class="material-icons text-green-600">bakery_dining</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-green-900 mb-2">Pita & Burek</h3>
+                                    <p class="text-gray-700">Delicious traditional pastries - try the excellent Sirnica (cheese-filled pita) for an authentic taste</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border-l-4 border-orange-500">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <span class="material-icons text-orange-600">location_on</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-orange-900 mb-2">Perfect Micro Location</h3>
+                                    <p class="text-gray-700">Ideal positioning - beach access, local amenities, and authentic Croatian atmosphere all within walking distance</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border-l-4 border-red-500">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <span class="material-icons text-red-600">schedule</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold text-red-900 mb-2">Guest Guidelines</h3>
+                                    <p class="text-gray-700">Check-in: 3-8 PM | Check-out: 8-11 AM | Quiet hours: 10 PM - 8 AM | No smoking inside</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Welcome Information Card -->
+                    <div class="bg-gradient-to-br from-material-blue-600 to-material-teal-600 p-8 rounded-3xl text-white shadow-2xl">
+                        <div class="text-center mb-8">
+                            <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                                <span class="material-icons text-4xl">place</span>
+                            </div>
+                            <h3 class="text-3xl font-bold mb-4">Your Gateway to Croatian Coast</h3>
+                            <p class="text-white/90 text-lg leading-relaxed">
+                                Experience the authentic Croatian lifestyle in our perfectly located accommodation. Steps from the beach, local markets, and the best traditional food in Srima.
+                            </p>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-3 p-4 bg-white/10 rounded-xl">
+                                <span class="material-icons text-yellow-300">apartment</span>
+                                <span>2nd Floor • 2nd Flat • Left Side</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-4 bg-white/10 rounded-xl">
+                                <span class="material-icons text-yellow-300">beach_access</span>
+                                <span>70 meters to pristine beach</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-4 bg-white/10 rounded-xl">
+                                <span class="material-icons text-yellow-300">local_grocery_store</span>
+                                <span>Tommy Market - 2 min walk</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-4 bg-white/10 rounded-xl">
+                                <span class="material-icons text-yellow-300">restaurant</span>
+                                <span>Šaci dining - 3 min walk</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 text-center">
+                            <a href="#contact" class="inline-flex items-center gap-2 bg-white text-material-blue-700 px-6 py-3 rounded-full font-semibold hover:bg-white/90 transition-all duration-300">
+                                <span class="material-icons">contact_support</span>
+                                Questions? Contact Us
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Local Food Highlights -->
+                <div class="mt-16 bg-gradient-to-r from-yellow-50 to-orange-50 border border-yellow-200 rounded-2xl p-8">
+                    <div class="text-center mb-8">
+                        <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="material-icons text-yellow-600 text-2xl">restaurant</span>
+                        </div>
+                        <h3 class="text-2xl font-semibold text-yellow-900 mb-2">Culinary Highlights</h3>
+                        <p class="text-yellow-800 leading-relaxed max-w-3xl mx-auto">
+                            Don't miss these local specialties during your stay! Our location puts you at the heart of authentic Croatian and Balkan cuisine. Ask locals for the best spots to try these traditional dishes.
+                        </p>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-white p-6 rounded-xl shadow-sm">
+                            <h4 class="font-semibold text-gray-900 mb-2">🥘 Čevapi</h4>
+                            <p class="text-gray-700 text-sm">Traditional grilled meat fingers served with onions, kajmak, and fresh bread</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm">
+                            <h4 class="font-semibold text-gray-900 mb-2">🥧 Sirnica (Cheese Pita)</h4>
+                            <p class="text-gray-700 text-sm">Excellent flaky pastry filled with fresh cheese - perfect for breakfast or snack</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Map Section -->
+        <section id="map" class="py-20 bg-gradient-to-br from-material-blue-50 to-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold text-material-blue-900 mb-4">Navigate to Srima from Sarajevo</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">Interactive map and GPS navigation to guide your journey from Sarajevo to beautiful Srima</p>
+                </div>
+                
+                <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
+                    <div class="p-8">
+                        <div class="mb-8 text-center">
+                            <a href="https://maps.app.goo.gl/TnDuBhacF5GHS7Wc8" target="_blank" class="inline-flex items-center gap-3 bg-gradient-to-r from-material-blue-600 to-material-blue-700 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                                <span class="material-icons">navigation</span>
+                                Open GPS Navigation
+                            </a>
+                        </div>
+                        
+                        <div class="rounded-2xl overflow-hidden shadow-lg mb-8">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d741394.9447596073!2d17.28842!3d43.8563!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e6!4m5!1s0x4758cbb1ed719bd1%3A0x562ecda6de87b33e!2sSarajevo%2C%20Bosnia%20and%20Herzegovina!3m2!1d43.8563033!2d18.4130763!4m5!1s0x4761fa62d2c0b88f%3A0x12290696a76ccc8c!2sSrima%2C%20Croatia!3m2!1d43.6361111!2d15.8836111!5e0!3m2!1sen!2sus!4v1640995200000!5m2!1sen!2sus" 
+                                width="100%" 
+                                height="500" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                        
+                        <div class="bg-gradient-to-r from-material-teal-50 to-material-blue-50 rounded-2xl p-8">
+                            <h3 class="text-2xl font-semibold text-material-blue-900 mb-6 flex items-center gap-3">
+                                <span class="material-icons text-material-teal-600">route</span>
+                                Route Details
+                            </h3>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="flex items-center gap-4 p-4 bg-white rounded-xl shadow-sm">
+                                    <div class="w-12 h-12 bg-material-blue-100 rounded-lg flex items-center justify-center">
+                                        <span class="material-icons text-material-blue-600">straighten</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-material-blue-900">Distance</p>
+                                        <p class="text-gray-600">~350 km</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-4 p-4 bg-white rounded-xl shadow-sm">
+                                    <div class="w-12 h-12 bg-material-teal-100 rounded-lg flex items-center justify-center">
+                                        <span class="material-icons text-material-teal-600">schedule</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-material-teal-900">Travel Time</p>
+                                        <p class="text-gray-600">4-5 hours</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-4 p-4 bg-white rounded-xl shadow-sm">
+                                    <div class="w-12 h-12 bg-material-indigo-100 rounded-lg flex items-center justify-center">
+                                        <span class="material-icons text-material-indigo-600">flag</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-material-indigo-900">Border Crossing</p>
+                                        <p class="text-gray-600">Bosnia-Croatia</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-4 p-4 bg-white rounded-xl shadow-sm">
+                                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                        <span class="material-icons text-green-600">map</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-green-900">GPS Link</p>
+                                        <a href="https://maps.app.goo.gl/TnDuBhacF5GHS7Wc8" target="_blank" class="text-material-blue-600 hover:text-material-blue-800 font-medium">Open in Maps</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-material-blue-900 to-material-indigo-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h3 class="text-2xl font-bold mb-4">Srima Tourism Guide</h3>
+                <p class="text-material-blue-200 mb-4">&copy; 2025 Srima Tourism Guide. All rights reserved.</p>
+                <p class="text-material-blue-300">Plan your journey from Sarajevo to beautiful Srima</p>
+                <div class="mt-8 flex justify-center space-x-6">
+                    <a href="#" class="text-material-blue-300 hover:text-white transition-colors duration-200">
+                        <span class="material-icons">facebook</span>
+                    </a>
+                    <a href="#" class="text-material-blue-300 hover:text-white transition-colors duration-200">
+                        <span class="material-icons">share</span>
+                    </a>
+                    <a href="#" class="text-material-blue-300 hover:text-white transition-colors duration-200">
+                        <span class="material-icons">email</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                // Close mobile menu if open
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 10) {
+                nav.classList.add('shadow-xl');
+            } else {
+                nav.classList.remove('shadow-xl');
+            }
+        });
+    </script>
+</body>
+</html>
