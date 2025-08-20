@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Booking</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-teal-50 min-h-screen flex items-center justify-center">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+    <h2 class="text-2xl font-bold mb-4">Book Your Stay</h2>
+    <form id="booking-form" class="space-y-4">
+      <div>
+        <label for="name" class="block text-sm font-medium">Name</label>
+        <input id="name" type="text" required class="mt-1 w-full border rounded px-3 py-2" />
+      </div>
+      <div>
+        <label for="email" class="block text-sm font-medium">Email</label>
+        <input id="email" type="email" required class="mt-1 w-full border rounded px-3 py-2" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1">Select Date</label>
+        <div class="mb-2 flex items-center justify-between">
+          <button id="prev-month" type="button" class="px-2 py-1 bg-gray-200 rounded">Prev</button>
+          <div id="current-month" class="font-semibold"></div>
+          <button id="next-month" type="button" class="px-2 py-1 bg-gray-200 rounded">Next</button>
+        </div>
+        <div id="calendar" class="grid grid-cols-7 gap-1 text-center"></div>
+        <input id="date" type="hidden" required />
+      </div>
+      <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded">Request Booking</button>
+    </form>
+    <p id="message" class="mt-4 text-green-600 hidden">Booking request submitted!</p>
+  </div>
+  <script>
+    const form = document.getElementById('booking-form');
+    const message = document.getElementById('message');
+    const calendarEl = document.getElementById('calendar');
+    const currentMonthEl = document.getElementById('current-month');
+    const prevBtn = document.getElementById('prev-month');
+    const nextBtn = document.getElementById('next-month');
+
+    let currentMonth = new Date().getMonth();
+    let currentYear = new Date().getFullYear();
+
+    const repoOwner = 'dzenanmuftic';
+    const repoName = 'Srima';
+    const filePath = 'reservations.json';
+    const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`;
+
+    async function loadBookings() {
+      const res = await fetch(apiUrl);
+      const data = await res.json();
+      return { bookings: JSON.parse(atob(data.content)), sha: data.sha };
+    }
+
+    async function saveBookings(bookings, sha) {
+      await fetch(apiUrl, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Basic ' + btoa('admin:admin123')
+        },
+        body: JSON.stringify({
+          message: 'Add booking',
+          content: btoa(JSON.stringify(bookings, null, 2)),
+          sha
+        })
+      });
+    }
+
+    function renderCalendar(bookings) {
+      calendarEl.innerHTML = '';
+      currentMonthEl.textContent = new Date(currentYear, currentMonth).toLocaleString('default', { month: 'long', year: 'numeric' });
+      const daysOfWeek = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+      daysOfWeek.forEach(d => {
+        const div = document.createElement('div');
+        div.textContent = d;
+        div.className = 'font-medium';
+        calendarEl.appendChild(div);
+      });
+      const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+      const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+      for (let i = 0; i < firstDay; i++) {
+        calendarEl.appendChild(document.createElement('div'));
+      }
+      for (let day = 1; day <= daysInMonth; day++) {
+        const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+        const booked = bookings.some(b => b.date === dateStr);
+        const cell = document.createElement('div');
+        cell.textContent = day;
+        cell.className = 'p-2 rounded cursor-pointer';
+        if (booked) {
+          cell.classList.add('bg-gray-200','text-gray-500','cursor-not-allowed');
+        } else {
+          cell.addEventListener('click', () => {
+            document.querySelectorAll('#calendar .selected').forEach(el => el.classList.remove('bg-blue-500','text-white','selected'));
+            cell.classList.add('bg-blue-500','text-white','selected');
+            document.getElementById('date').value = dateStr;
+          });
+        }
+        calendarEl.appendChild(cell);
+      }
+    }
+
+    async function initCalendar() {
+      const { bookings } = await loadBookings();
+      renderCalendar(bookings);
+      prevBtn.onclick = () => { if (--currentMonth < 0) { currentMonth = 11; currentYear--; } renderCalendar(bookings); };
+      nextBtn.onclick = () => { if (++currentMonth > 11) { currentMonth = 0; currentYear++; } renderCalendar(bookings); };
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const selected = document.getElementById('date').value;
+      if (!selected) return;
+      const { bookings, sha } = await loadBookings();
+      if (bookings.some(b => b.date === selected)) {
+        alert('Date already booked');
+        return;
+      }
+      bookings.push({
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        date: selected,
+        status: 'pending'
+      });
+      await saveBookings(bookings, sha);
+      form.reset();
+      document.getElementById('date').value = '';
+      message.classList.remove('hidden');
+      initCalendar();
+    });
+
+    initCalendar();
+  </script>
+</body>
+</html>

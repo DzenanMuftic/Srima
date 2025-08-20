@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-teal-50 min-h-screen flex items-center justify-center">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md" id="login-container">
+    <h2 class="text-2xl font-bold mb-4">Admin Login</h2>
+    <form id="login-form" class="space-y-4">
+      <div>
+        <label for="username" class="block text-sm font-medium">Username</label>
+        <input id="username" type="text" required class="mt-1 w-full border rounded px-3 py-2" />
+      </div>
+      <div>
+        <label for="password" class="block text-sm font-medium">Password</label>
+        <input id="password" type="password" required class="mt-1 w-full border rounded px-3 py-2" />
+      </div>
+      <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded">Login</button>
+    </form>
+    <p id="login-error" class="mt-4 text-red-600 hidden">Invalid credentials</p>
+  </div>
+  <div id="admin-panel" class="hidden bg-white p-6 rounded-lg shadow-lg w-full max-w-xl">
+    <div class="mb-6">
+      <div class="flex items-center justify-between mb-2">
+        <button id="prev-month" class="px-2 py-1 bg-gray-200 rounded">Prev</button>
+        <div id="current-month" class="font-semibold"></div>
+        <button id="next-month" class="px-2 py-1 bg-gray-200 rounded">Next</button>
+      </div>
+      <div id="calendar" class="grid grid-cols-7 gap-1 text-center"></div>
+    </div>
+    <h2 class="text-2xl font-bold mb-4">Pending Bookings</h2>
+    <ul id="booking-list" class="space-y-4"></ul>
+  </div>
+  <script>
+    const loginForm = document.getElementById('login-form');
+    const loginContainer = document.getElementById('login-container');
+    const adminPanel = document.getElementById('admin-panel');
+    const bookingList = document.getElementById('booking-list');
+    const loginError = document.getElementById('login-error');
+    const calendarEl = document.getElementById('calendar');
+    const currentMonthEl = document.getElementById('current-month');
+    const prevBtn = document.getElementById('prev-month');
+    const nextBtn = document.getElementById('next-month');
+
+    const repoOwner = 'dzenanmuftic';
+    const repoName = 'Srima';
+    const filePath = 'reservations.json';
+    const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`;
+    let fileSha = '';
+    let bookingsData = [];
+    let currentMonth = new Date().getMonth();
+    let currentYear = new Date().getFullYear();
+
+    async function loadBookings() {
+      const res = await fetch(apiUrl);
+      const data = await res.json();
+      fileSha = data.sha;
+      return JSON.parse(atob(data.content));
+    }
+
+    async function saveBookings(bookings) {
+      await fetch(apiUrl, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Basic ' + btoa('admin:admin123')
+        },
+        body: JSON.stringify({
+          message: 'Update booking',
+          content: btoa(JSON.stringify(bookings, null, 2)),
+          sha: fileSha
+        })
+      });
+    }
+
+    function renderCalendar() {
+      calendarEl.innerHTML = '';
+      currentMonthEl.textContent = new Date(currentYear, currentMonth).toLocaleString('default', { month: 'long', year: 'numeric' });
+      const daysOfWeek = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+      daysOfWeek.forEach(d => {
+        const div = document.createElement('div');
+        div.textContent = d;
+        div.className = 'font-medium';
+        calendarEl.appendChild(div);
+      });
+      const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+      const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+      for (let i = 0; i < firstDay; i++) calendarEl.appendChild(document.createElement('div'));
+      for (let day = 1; day <= daysInMonth; day++) {
+        const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+        const booking = bookingsData.find(b => b.date === dateStr);
+        const cell = document.createElement('div');
+        cell.textContent = day;
+        cell.className = 'p-2 rounded';
+        if (booking) {
+          if (booking.status === 'approved') {
+            cell.classList.add('bg-green-200');
+          } else {
+            cell.classList.add('bg-yellow-200');
+          }
+        }
+        calendarEl.appendChild(cell);
+      }
+    }
+
+    function renderBookings() {
+      bookingList.innerHTML = '';
+      bookingsData.forEach((booking) => {
+        const li = document.createElement('li');
+        li.className = 'border rounded p-4 flex items-center justify-between';
+        li.innerHTML = `
+          <div>
+            <p><strong>${booking.name}</strong> (${booking.email})</p>
+            <p>Date: ${booking.date}</p>
+            <p>Status: ${booking.status}</p>
+          </div>
+        `;
+        if (booking.status === 'pending') {
+          const btn = document.createElement('button');
+          btn.textContent = 'Approve';
+          btn.className = 'ml-4 bg-green-600 text-white px-3 py-1 rounded';
+          btn.addEventListener('click', async () => {
+            booking.status = 'approved';
+            await saveBookings(bookingsData);
+            await refresh();
+          });
+          li.appendChild(btn);
+        }
+        bookingList.appendChild(li);
+      });
+    }
+
+    async function refresh() {
+      bookingsData = await loadBookings();
+      renderCalendar();
+      renderBookings();
+    }
+
+    prevBtn.onclick = () => { if (--currentMonth < 0) { currentMonth = 11; currentYear--; } renderCalendar(); };
+    nextBtn.onclick = () => { if (++currentMonth > 11) { currentMonth = 0; currentYear++; } renderCalendar(); };
+
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+      if (user === 'admin' && pass === 'admin123') {
+        loginContainer.classList.add('hidden');
+        adminPanel.classList.remove('hidden');
+        await refresh();
+      } else {
+        loginError.classList.remove('hidden');
+      }
+    });
+  </script>
+</body>
+</html>
