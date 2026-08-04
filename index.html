@@ -258,6 +258,7 @@
                         <a href="#streetview" class="text-material-blue-800 hover:text-material-blue-600 px-2 lg:px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-material-blue-50">Street View</a>
                         <a href="#about" class="text-material-blue-800 hover:text-material-blue-600 px-2 lg:px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-material-blue-50">About</a>
                         <a href="#house-rules" class="text-material-blue-800 hover:text-material-blue-600 px-2 lg:px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-material-blue-50">House Rules</a>
+                        <a href="#calendar" class="text-material-blue-800 hover:text-material-blue-600 px-2 lg:px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-material-blue-50">Calendar</a>
                         <a href="#map" class="text-material-blue-800 hover:text-material-blue-600 px-2 lg:px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-material-blue-50">Map</a>
                     </div>
                 </div>
@@ -276,6 +277,7 @@
                 <a href="#streetview" class="block px-4 py-3 text-material-blue-800 hover:text-material-blue-600 hover:bg-material-blue-50 rounded-lg text-base font-medium transition-all duration-200">Street View</a>
                 <a href="#about" class="block px-4 py-3 text-material-blue-800 hover:text-material-blue-600 hover:bg-material-blue-50 rounded-lg text-base font-medium transition-all duration-200">About</a>
                 <a href="#house-rules" class="block px-4 py-3 text-material-blue-800 hover:text-material-blue-600 hover:bg-material-blue-50 rounded-lg text-base font-medium transition-all duration-200">House Rules</a>
+                <a href="#calendar" class="block px-4 py-3 text-material-blue-800 hover:text-material-blue-600 hover:bg-material-blue-50 rounded-lg text-base font-medium transition-all duration-200">Calendar</a>
                 <a href="#map" class="block px-4 py-3 text-material-blue-800 hover:text-material-blue-600 hover:bg-material-blue-50 rounded-lg text-base font-medium transition-all duration-200">Map</a>
             </div>
         </div>
@@ -926,6 +928,89 @@
                     </div>
                 </div>
 
+        <!-- Calendar Section -->
+        <section id="calendar" class="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-material-teal-50 via-white to-material-blue-50">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-material-blue-900 mb-4">Check Availability</h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">Browse available dates and plan your stay in Srima. Select check-in and check-out dates below.</p>
+                </div>
+
+                <!-- Legend -->
+                <div class="flex flex-wrap justify-center gap-4 sm:gap-6 mb-8 text-sm">
+                    <div class="flex items-center gap-2"><span class="w-4 h-4 rounded bg-white border border-gray-300 inline-block"></span> Available</div>
+                    <div class="flex items-center gap-2"><span class="w-4 h-4 rounded bg-red-400 inline-block"></span> Booked</div>
+                    <div class="flex items-center gap-2"><span class="w-4 h-4 rounded bg-material-teal-500 inline-block"></span> Check-in</div>
+                    <div class="flex items-center gap-2"><span class="w-4 h-4 rounded bg-material-blue-500 inline-block"></span> Check-out</div>
+                    <div class="flex items-center gap-2"><span class="w-4 h-4 rounded bg-material-blue-100 inline-block"></span> Selected range</div>
+                </div>
+
+                <!-- Calendar wrapper: two months side by side on md+ -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="calendar-grid">
+                    <!-- Month A -->
+                    <div class="bg-white rounded-2xl shadow-md overflow-hidden">
+                        <div class="flex items-center justify-between bg-material-blue-700 text-white px-5 py-3">
+                            <button id="prev-month" class="p-1 rounded-lg hover:bg-white/20 transition-colors" aria-label="Previous month">
+                                <span class="material-icons text-xl">chevron_left</span>
+                            </button>
+                            <h3 id="month-label-a" class="font-semibold text-base sm:text-lg"></h3>
+                            <button id="between-months" class="p-1 invisible" aria-hidden="true">
+                                <span class="material-icons text-xl">chevron_right</span>
+                            </button>
+                        </div>
+                        <div class="p-3 sm:p-4">
+                            <div class="grid grid-cols-7 text-center text-xs font-semibold text-gray-500 mb-2">
+                                <span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span>
+                            </div>
+                            <div id="days-a" class="grid grid-cols-7 gap-px text-sm"></div>
+                        </div>
+                    </div>
+
+                    <!-- Month B -->
+                    <div class="bg-white rounded-2xl shadow-md overflow-hidden">
+                        <div class="flex items-center justify-between bg-material-blue-700 text-white px-5 py-3">
+                            <button id="between-months-2" class="p-1 invisible" aria-hidden="true">
+                                <span class="material-icons text-xl">chevron_left</span>
+                            </button>
+                            <h3 id="month-label-b" class="font-semibold text-base sm:text-lg"></h3>
+                            <button id="next-month" class="p-1 rounded-lg hover:bg-white/20 transition-colors" aria-label="Next month">
+                                <span class="material-icons text-xl">chevron_right</span>
+                            </button>
+                        </div>
+                        <div class="p-3 sm:p-4">
+                            <div class="grid grid-cols-7 text-center text-xs font-semibold text-gray-500 mb-2">
+                                <span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span>
+                            </div>
+                            <div id="days-b" class="grid grid-cols-7 gap-px text-sm"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Selection summary -->
+                <div id="booking-summary" class="mt-8 hidden bg-white rounded-2xl shadow-md p-6 text-center">
+                    <p class="text-gray-700 font-medium text-base sm:text-lg">
+                        <span class="material-icons align-middle text-material-teal-600 mr-1">flight_land</span>
+                        Check-in: <span id="summary-checkin" class="font-bold text-material-teal-700"></span>
+                        &nbsp;&nbsp;
+                        <span class="material-icons align-middle text-material-blue-600 mr-1">flight_takeoff</span>
+                        Check-out: <span id="summary-checkout" class="font-bold text-material-blue-700"></span>
+                    </p>
+                    <p id="summary-nights" class="text-gray-500 mt-1 text-sm"></p>
+                    <button id="clear-selection" class="mt-4 px-5 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-sm font-medium transition-colors">Clear selection</button>
+                </div>
+
+                <!-- Contact CTA -->
+                <div class="mt-8 bg-gradient-to-r from-material-teal-600 to-material-blue-600 rounded-2xl p-6 text-white text-center shadow-lg">
+                    <h4 class="text-xl font-bold mb-2">Ready to book?</h4>
+                    <p class="mb-4 text-material-blue-100">Contact us to confirm your reservation for the selected dates.</p>
+                    <a href="mailto:dzenan.muftic@gmail.com" class="inline-flex items-center gap-2 bg-white text-material-blue-700 font-semibold px-6 py-3 rounded-xl hover:bg-material-blue-50 transition-colors shadow">
+                        <span class="material-icons text-xl">email</span>
+                        dzenan.muftic@gmail.com
+                    </a>
+                </div>
+            </div>
+        </section>
+
         <!-- Map Section -->
         <section id="map" class="py-20 bg-gradient-to-br from-material-blue-50 to-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1061,7 +1146,219 @@
             });
         });
 
-        // Add scroll effect to navigation
+        // ── Availability Calendar ──────────────────────────────────────────────
+        (function () {
+            // Booked date ranges (inclusive). Add/remove ranges as needed.
+            const bookedRanges = [
+                { from: '2026-08-10', to: '2026-08-17' },
+                { from: '2026-08-24', to: '2026-08-31' },
+                { from: '2026-09-05', to: '2026-09-12' },
+            ];
+
+            // Pre-compute a Set of booked date strings for O(1) lookup.
+            const bookedSet = new Set();
+            bookedRanges.forEach(({ from, to }) => {
+                let d = new Date(from + 'T00:00:00');
+                const end = new Date(to + 'T00:00:00');
+                while (d <= end) {
+                    bookedSet.add(d.toISOString().slice(0, 10));
+                    d.setDate(d.getDate() + 1);
+                }
+            });
+
+            const monthNames = ['January','February','March','April','May','June',
+                                'July','August','September','October','November','December'];
+
+            let viewYear, viewMonth; // first displayed month
+            let checkin = null, checkout = null; // selected dates (ISO strings)
+            let hoverDate = null;
+
+            function today() {
+                const d = new Date();
+                d.setHours(0, 0, 0, 0);
+                return d;
+            }
+
+            function isoFromDate(d) {
+                return d.toISOString().slice(0, 10);
+            }
+
+            function dateFromIso(s) {
+                return new Date(s + 'T00:00:00');
+            }
+
+            function isBooked(iso) { return bookedSet.has(iso); }
+
+            function isPast(iso) { return dateFromIso(iso) < today(); }
+
+            function isInRange(iso) {
+                if (!checkin || !checkout) return false;
+                const d = dateFromIso(iso);
+                return d > dateFromIso(checkin) && d < dateFromIso(checkout);
+            }
+
+            function isHoverRange(iso) {
+                if (!checkin || checkout || !hoverDate) return false;
+                const d = dateFromIso(iso);
+                const ci = dateFromIso(checkin);
+                const ho = dateFromIso(hoverDate);
+                if (ho <= ci) return false;
+                return d > ci && d < ho;
+            }
+
+            function buildMonth(year, month, containerId) {
+                const container = document.getElementById(containerId);
+                container.innerHTML = '';
+
+                const firstDay = new Date(year, month, 1);
+                // Monday-based week: 0=Mon … 6=Sun
+                let startOffset = firstDay.getDay() - 1;
+                if (startOffset < 0) startOffset = 6;
+
+                const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+                // Empty cells before day 1
+                for (let i = 0; i < startOffset; i++) {
+                    container.appendChild(document.createElement('div'));
+                }
+
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const d = new Date(year, month, day);
+                    const iso = isoFromDate(d);
+                    const btn = document.createElement('button');
+                    btn.textContent = day;
+                    btn.dataset.date = iso;
+
+                    const past = isPast(iso);
+                    const booked = isBooked(iso);
+
+                    btn.className = [
+                        'w-full aspect-square flex items-center justify-center rounded-lg text-xs sm:text-sm font-medium transition-all duration-150',
+                        past || booked
+                            ? 'cursor-not-allowed opacity-60'
+                            : 'cursor-pointer',
+                    ].join(' ');
+
+                    if (past) {
+                        btn.classList.add('text-gray-300');
+                    } else if (booked) {
+                        btn.classList.add('bg-red-400', 'text-white');
+                    } else if (iso === checkin) {
+                        btn.classList.add('bg-material-teal-500', 'text-white', 'shadow');
+                    } else if (iso === checkout) {
+                        btn.classList.add('bg-material-blue-500', 'text-white', 'shadow');
+                    } else if (isInRange(iso) || isHoverRange(iso)) {
+                        btn.classList.add('bg-material-blue-100', 'text-material-blue-800');
+                    } else {
+                        btn.classList.add('hover:bg-material-blue-50', 'text-gray-800');
+                    }
+
+                    if (!past && !booked) {
+                        btn.addEventListener('mouseenter', () => {
+                            hoverDate = iso;
+                            renderCalendars();
+                        });
+                        btn.addEventListener('mouseleave', () => {
+                            hoverDate = null;
+                            renderCalendars();
+                        });
+                        btn.addEventListener('click', () => handleDateClick(iso));
+                    }
+
+                    container.appendChild(btn);
+                }
+            }
+
+            function handleDateClick(iso) {
+                if (!checkin || (checkin && checkout)) {
+                    // Start fresh selection
+                    checkin = iso;
+                    checkout = null;
+                } else {
+                    // Second click
+                    if (iso <= checkin) {
+                        checkin = iso;
+                        checkout = null;
+                    } else {
+                        // Check no booked dates in range
+                        let hasConflict = false;
+                        let d = dateFromIso(checkin);
+                        d.setDate(d.getDate() + 1);
+                        const end = dateFromIso(iso);
+                        while (d < end) {
+                            if (isBooked(isoFromDate(d))) { hasConflict = true; break; }
+                            d.setDate(d.getDate() + 1);
+                        }
+                        if (hasConflict) {
+                            checkin = iso;
+                            checkout = null;
+                        } else {
+                            checkout = iso;
+                        }
+                    }
+                }
+                renderCalendars();
+                updateSummary();
+            }
+
+            function updateSummary() {
+                const el = document.getElementById('booking-summary');
+                if (checkin && checkout) {
+                    document.getElementById('summary-checkin').textContent = formatDisplay(checkin);
+                    document.getElementById('summary-checkout').textContent = formatDisplay(checkout);
+                    const nights = Math.round((dateFromIso(checkout) - dateFromIso(checkin)) / 86400000);
+                    document.getElementById('summary-nights').textContent = nights + (nights === 1 ? ' night' : ' nights');
+                    el.classList.remove('hidden');
+                } else {
+                    el.classList.add('hidden');
+                }
+            }
+
+            function formatDisplay(iso) {
+                const d = dateFromIso(iso);
+                return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+            }
+
+            function renderCalendars() {
+                const labelA = document.getElementById('month-label-a');
+                const labelB = document.getElementById('month-label-b');
+
+                const monthB = (viewMonth + 1) % 12;
+                const yearB = viewMonth === 11 ? viewYear + 1 : viewYear;
+
+                labelA.textContent = monthNames[viewMonth] + ' ' + viewYear;
+                labelB.textContent = monthNames[monthB] + ' ' + yearB;
+
+                buildMonth(viewYear, viewMonth, 'days-a');
+                buildMonth(yearB, monthB, 'days-b');
+            }
+
+            // Init: start from current month
+            const now = new Date();
+            viewYear = now.getFullYear();
+            viewMonth = now.getMonth();
+
+            document.getElementById('prev-month').addEventListener('click', () => {
+                if (viewMonth === 0) { viewMonth = 11; viewYear--; }
+                else viewMonth--;
+                renderCalendars();
+            });
+
+            document.getElementById('next-month').addEventListener('click', () => {
+                if (viewMonth === 11) { viewMonth = 0; viewYear++; }
+                else viewMonth++;
+                renderCalendars();
+            });
+
+            document.getElementById('clear-selection').addEventListener('click', () => {
+                checkin = null; checkout = null;
+                renderCalendars();
+                updateSummary();
+            });
+
+            renderCalendars();
+        })();
+        // ── End Availability Calendar ──────────────────────────────────────────
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
             if (window.scrollY > 10) {
